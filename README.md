@@ -6,9 +6,16 @@ InspIRCd is a modular Internet Relay Chat (IRC) server written in C++. It was cr
 
 ## Usage
 
+Pull image :
+
 ```bash
 docker pull hatamiarash7/irc-server
-docker run -d --name irc -p 6667:6667 hatamiarash7/irc-server
+```
+
+Configure `irc.conf` and then :
+
+```bash
+docker run -p 6667:6667 -v irc.conf:/inspircd/conf/inspircd.conf hatamiarash7/irc-server
 ```
 
 ## Support

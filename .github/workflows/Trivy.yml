@@ -1,12 +1,13 @@
 name: build
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
 jobs:
   build:
     name: Build
     runs-on: "ubuntu-18.04"
+    if: "!contains(github.event.head_commit.message, '[skip-ci]')"
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -18,13 +19,13 @@ jobs:
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: 'hatamiarash7/irc-server:${{ github.sha }}'
-          format: 'template'
-          template: '@/contrib/sarif.tpl'
-          output: 'trivy-results.sarif'
-          severity: 'CRITICAL,HIGH'
+          image-ref: "hatamiarash7/irc-server:${{ github.sha }}"
+          format: "template"
+          template: "@/contrib/sarif.tpl"
+          output: "trivy-results.sarif"
+          severity: "CRITICAL,HIGH"
 
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v1
         with:
-          sarif_file: 'trivy-results.sarif'
+          sarif_file: "trivy-results.sarif"

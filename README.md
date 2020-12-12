@@ -14,7 +14,7 @@ Pull image :
 docker pull hatamiarash7/irc-server
 ```
 
-Configure `irc.conf` and then :
+Configure `irc.conf` and :
 
 ```bash
 docker run -p 6667:6667 -v irc.conf:/inspircd/conf/inspircd.conf hatamiarash7/irc-server
